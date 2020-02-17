@@ -1,2 +1,2 @@
 # APICapstone
-This project allows a user to get specific job offers from the Upwork API while also specifying the number of results.
+This project allows a user to fetch a question from an API and get feedback on their choice. Final project will allow users to specify parameters on quiz.
