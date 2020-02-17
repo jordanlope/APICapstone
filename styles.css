@@ -4,10 +4,10 @@ html {
 }
 
 body {
+    background-color: #888888;
     margin: 0;
     padding: 0;
 }
-
 
 header {
     width: 100%;
@@ -32,8 +32,66 @@ header a {
 }
 
 section {
-    padding-top: 70px;
+    background-color: white;
+    padding-top: 100px;
+    padding-bottom: 20px;
     text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h2 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+button {
+    font-weight: bold;
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    width: 40%;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color:black;
+}
+
+button:focus {
+    outline-color: white;
+    border:black;
+}
+
+input {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    width: 40%;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+
+input:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color:black;
+}
+
+input:focus {
+    outline-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border:white;
 }
 
 .hide {
@@ -56,10 +114,24 @@ header a:hover {
     background-color: blue;
 }
 
-#search-form {
-    text-align: center;
+.feedback-correct {
+    color: white;
+    background-color: green;
+    display: inline-block;
+    font-weight: bold;
+    border: 1px solid black;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-#map {
-    height: 100%;
+.feedback-incorrect {
+    color: white;
+    background-color:red;
+    display: inline-block;
+    font-weight: bold;
+    border: 1px solid black;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
 }
