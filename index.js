@@ -7,7 +7,6 @@ let STORE = {
 
 const searchURL = 'https://opentdb.com/api.php';
 
-
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -64,47 +63,64 @@ function fetchQuestion() {
     })
 }
 
-$('body').on('click', '#js-submit-button', function(event) {
-    event.preventDefault();
+function formSubmit() {
+    $('body').on('click', '#js-submit-button', function(event) {
+        event.preventDefault();
+    
+        const selAnswer = $(this).closest('#content').find('.checked').attr('value');
+        console.log(`Pressed answer is ${selAnswer}`);
+        if(!selAnswer) {
+            console.log('no answer');
+        }
+        else if(selAnswer == STORE.correctAnswer) {
+            renderResults('Correct');
+        } else if(selAnswer != STORE.correctAnswer) {
+            renderResults('Incorrect');
+        }
+    });
+}
 
-    const selAnswer = $(this).closest('#content').find('.checked').attr('value');
-    console.log(`Pressed answer is ${selAnswer}`);
-    if(!selAnswer) {
-        console.log('no answer');
-    }
-    else if(selAnswer == STORE.correctAnswer) {
-        renderResults('Correct');
-    } else if(selAnswer != STORE.correctAnswer) {
-        renderResults('Incorrect');
-    }
-});
+function formOptions() {
+    $('body').on('click', '.js-form-option', (event) => {
+        const targetAnswer = $(event.currentTarget);
+    
+        const otherAnswer = $('.js-form-option').not(targetAnswer);
+    
+        const pressedBool = $(targetAnswer).attr('aria-pressed') === 'true';
+    
+        otherAnswer.removeClass('checked').attr('aria-pressed', false);
+    
+        targetAnswer.addClass('checked').attr('aria-pressed', !pressedBool);
+    });
+}
 
-$('body').on('click', '.js-form-option', (event) => {
-    const targetAnswer = $(event.currentTarget);
+function startOver() {
+    $('body').on('click', '#try-again-button', function(event) {
+        $('#content').replaceWith(
+            '<section id="content">' +
+            '<button id="start-button">Start Question</button>' +
+            '</section>'
+        );
+    });
+}
 
-    const otherAnswer = $('.js-form-option').not(targetAnswer);
+function startQuestion() {
+    $('body').on('click', '#start-button', function(event) {
+        console.log('Start button pressed')
+        fetchQuestion();
+    });
 
-    const pressedBool = $(targetAnswer).attr('aria-pressed') === 'true';
+    $('#start-button').click(function(event) {
+        console.log('Start button pressed')
+        fetchQuestion();
+    });
+}
 
-    otherAnswer.removeClass('checked').attr('aria-pressed', false);
+function handleEvents() {
+    formSubmit();
+    formOptions();
+    startOver();
+    startQuestion();
+}
 
-    targetAnswer.addClass('checked').attr('aria-pressed', !pressedBool);
-});
-
-$('body').on('click', '#try-again-button', function(event) {
-    $('#content').replaceWith(
-        '<section id="content">' +
-        '<button id="start-button">Start Question</button>' +
-        '</section>'
-    );
-});
-
-$('body').on('click', '#start-button', function(event) {
-    console.log('Start button pressed')
-    fetchQuestion();
-});
-
-$('#start-button').click(function(event){
-    console.log('Start button pressed')
-    fetchQuestion();
-});
+$(handleEvents())
